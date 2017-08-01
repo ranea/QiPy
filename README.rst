@@ -73,7 +73,7 @@ Computing the `class number`_ of |5|:
 .. _property testing: http://hypothesis.works/
 .. _pip: https://pip.pypa.io
 .. _ideal classes: https://en.wikipedia.org/wiki/Ideal_class_group
-.. _GitHub Page: https://ranea.github.io/qipy/
+.. _GitHub Page: https://ranea.github.io/QiPy/
 .. |2| image:: images/2.gif
 .. |5| image:: images/5.gif
 .. |frac| image:: images/frac.gif
