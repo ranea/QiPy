@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quadratic Integers &mdash; QiPy 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="QiPy 1.0 documentation" href="index.html"/>
+        <link rel="next" title="Ideals" href="ideal.html"/>
+        <link rel="prev" title="QiPy documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QiPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quadratic Integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ideal.html">Ideals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_group.html">Class groups</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QiPy</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quadratic Integers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/quadratic_integer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quadratic-integers">
+<h1>Quadratic Integers<a class="headerlink" href="#quadratic-integers" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-quadratic_integer"></span><p>This module allows to work with <a class="reference internal" href="#quadratic-integers">quadratic integers</a>.</p>
+<p>To compute operations with quadratic integers within the same quadratic ring,
+all operands must be created as <a class="reference internal" href="#quadratic_integer.QuadraticInteger" title="quadratic_integer.QuadraticInteger"><code class="xref any py py-class docutils literal"><span class="pre">QuadraticInteger</span></code></a> objects. To do so:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Create the quadratic integer ring <span class="math">\(\mathcal{O}_{\mathbb{Q}[\sqrt{d}]}\)</span>
+with the function <a class="reference internal" href="#quadratic_integer.QuadraticIntegerRing" title="quadratic_integer.QuadraticIntegerRing"><code class="xref any py py-func docutils literal"><span class="pre">QuadraticIntegerRing</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use the returned factory to create quadratic integers of the form
+<span class="math">\(a + b \sqrt{d}\)</span>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 - I&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Then, compute the desired operations with the available operators and methods.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">/</span> <span class="n">beta</span>
+<span class="go">I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">alpha</span> <span class="o">/</span> <span class="n">beta</span><span class="p">)</span><span class="o">.</span><span class="n">is_unit</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Note that this module, <code class="docutils literal"><span class="pre">quadratic_integer</span></code>, need to be imported to use
+its classes and functions. There are basically two ways to import it:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Import all functions and classes of QiPy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qipy</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Import only the package, and use the package’s identifier to
+access the classes and functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qipy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">qipy</span><span class="o">.</span><span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<dl class="function">
+<dt id="quadratic_integer.QuadraticIntegerRing">
+<code class="descname">QuadraticIntegerRing</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticIntegerRing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the class of quadratic integers of the form
+<span class="math">\(a + b \sqrt{d}\)</span>.</p>
+<p>The returned class is used as a factory, that is, to create quadratic
+integer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">I</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> – a square-free integer.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The factory of quadratic integers.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="quadratic_integer.QuadraticInteger">
+<em class="property">class </em><code class="descname">QuadraticInteger</code><span class="sig-paren">(</span><em>value=None</em>, <em>coeff_e=None</em>, <em>coeff_d=None</em><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent a quadratic integer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">1 - I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span>
+<span class="go">I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">*</span> <span class="n">beta</span>
+<span class="go">1 + I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">-1</span>
+</pre></div>
+</div>
+<p>This class supports the operators  <code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code> y <code class="docutils literal"><span class="pre">**</span></code>
+with their natural meaning.</p>
+<p>There are four ways to create a quadratic integer:</p>
+<ul>
+<li><p class="first">With a python expression.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">With a SymPy expression surrounded by <code class="docutils literal"><span class="pre">&quot;</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="s2">&quot;1/2 * (-1 + I * sqrt(3))&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">With a pair of integers that represents the coefficients respect
+the <a class="reference external" href="https://en.wikipedia.org/wiki/Algebraic_number_field#Integral_basis">integral basis</a> <span class="math">\(\{1, e\}\)</span> (see below).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="n">coeff_e</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">With a pair of rationals that represents the coefficients respect
+the basis <span class="math">\(\{1, \sqrt{d}\}\)</span> (see below).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="n">coeff_d</span><span class="o">=</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If the input contains fractions, each fraction must be written
+as a Rational object or the input must be surround by <code class="docutils literal"><span class="pre">&quot;</span></code>.</p>
+<p class="last">More info at <a class="reference external" href="http://docs.sympy.org/dev/gotchas.html#python-numbers-vs-sympy-numbers">SymPy’s documentation</a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The element <span class="math">\(e\)</span> of the <a class="reference external" href="https://en.wikipedia.org/wiki/Algebraic_number_field#Integral_basis">integral basis</a> is defined as follows:</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}\sqrt{d}, \quad \mathrm{if} \ d \ \ne 1 \mod 4\\(1 + \sqrt{d})/2, \quad \mathrm{if} \ d = 1 \mod 4\end{aligned}\end{align} \]</div>
+<p class="last">Notice that in the first case, the basis <span class="math">\(\{1, e\}\)</span> and
+<span class="math">\(\{1, \sqrt{d}\}\)</span> are the same and so the coefficients.</p>
+</div>
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.d">
+<code class="descname">d</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.d" title="Permalink to this definition">¶</a></dt>
+<dd><p>the non-square free integer that defines the ring of quadratic
+integers (class attribute).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.e">
+<code class="descname">e</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.e" title="Permalink to this definition">¶</a></dt>
+<dd><p>the element of the integral basis (class attribute, see below).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.norm">
+<code class="descname">norm</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <a class="reference external" href="https://en.wikipedia.org/wiki/Field_norm">norm</a> of the quadratic integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.trace">
+<code class="descname">trace</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <a class="reference external" href="https://en.wikipedia.org/wiki/Field_trace">trace</a> of the quadratic integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.conjugate">
+<code class="descname">conjugate</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.conjugate" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_element_(field_theory)">algebraic conjugate</a> of the quadratic integer.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Given <span class="math">\(a + b \sqrt{d}\)</span>, its conjugate is <span class="math">\(a - b \sqrt{d}\)</span>,
+which is not the complex conjugate when <span class="math">\(d &gt; 0\)</span>.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">1 + I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">conjugate</span>
+<span class="go">1 - I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span>
+<span class="go">1 + sqrt(5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span><span class="o">.</span><span class="n">conjugate</span>
+<span class="go">-sqrt(5) + 1</span>
+</pre></div>
+</div>
+</div>
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.coeff_d">
+<code class="descname">coeff_d</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.coeff_d" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Tuple</em> – the rational (<a class="reference external" href="https://en.wikipedia.org/wiki/half-integer">half-integer</a>) coefficients with respect
+to the basis <span class="math">\(\{1, \sqrt{d}\}\)</span>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">coeff_d</span>
+<span class="go">(-1/2, 1/2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="quadratic_integer.QuadraticInteger.coeff_e">
+<code class="descname">coeff_e</code><a class="headerlink" href="#quadratic_integer.QuadraticInteger.coeff_e" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Tuple</em> – the integer coefficients with respect to the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Algebraic_number_field#Integral_basis">integral basis</a> <span class="math">\(\{1, e\}\)</span>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">-1/2 + sqrt(3)*I/2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">coeff_e</span>
+<span class="go">(-1, 1)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="quadratic_integer.QuadraticInteger.elements_with_norm">
+<em class="property">classmethod </em><code class="descname">elements_with_norm</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger.elements_with_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the quadratic integers of norm <span class="math">\(n\)</span>.</p>
+<p>If <span class="math">\(d\)</span> is negative, it returns all of them. Otherwise,
+it returns a list of generators (see <em>Structure of solutions to</em>
+<span class="math">\(x^2 − Dy^2 = N\)</span> in <a class="reference external" href="http://www.jpr2718.org/pell.pdf">Solving the general Pell equation</a>
+by J.P. Robertson).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span><span class="o">.</span><span class="n">elements_with_norm</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[1, -1, I, -I]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="o">.</span><span class="n">elements_with_norm</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[sqrt(5)/2 + 3/2, 3*sqrt(5)/2 + 7/2, 4*sqrt(5) + 9]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the quadratic integers of norm <span class="math">\(n\)</span>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="#quadratic_integer.QuadraticInteger" title="quadratic_integer.QuadraticInteger">QuadraticInteger</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="quadratic_integer.QuadraticInteger.euclidean_function">
+<code class="descname">euclidean_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger.euclidean_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value of the <a class="reference external" href="https://en.wikipedia.org/wiki/Quadratic_integer#Euclidean_rings_of_quadratic_integers">Euclidean function</a> (the absolute
+value of the norm).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">1 + I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">norm</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">euclidean_function</span><span class="p">()</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span>
+<span class="go">1 + sqrt(5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span><span class="o">.</span><span class="n">norm</span>
+<span class="go">-4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span><span class="o">.</span><span class="n">euclidean_function</span><span class="p">()</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The ring of quadratic integers must be an Euclidean domain
+with the norm as a Euclidean function, that is,  <span class="math">\(d\)</span>
+(seq. <a class="reference external" href="https://oeis.org/A048981">A048981</a>) must be one of the following:</p>
+<blockquote class="last">
+<div>-11, -7, -3, -2, -1, 2, 3, 5, 6, 7, 11, 13, 17, 19, 21, 29, 33, 37, 41,
+57, 73</div></blockquote>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quadratic_integer.QuadraticInteger.factor">
+<code class="descname">factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger.factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor the quadratic integer as a product of irreducible ones.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+<span class="go">[1 + I, 1 - I]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the irreducible factors.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="#quadratic_integer.QuadraticInteger" title="quadratic_integer.QuadraticInteger">QuadraticInteger</a>]</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The ring of quadratic integers must be a unique factorization
+domain. Examples of <span class="math">\(d\)</span>  (seq. <a class="reference external" href="https://oeis.org/A048981">A048981</a>) that makes the
+ring of quadratic integers an UFD are the following:</p>
+<blockquote>
+<div>-163, -67, -43, -19, -11, -7, -3, -2, -1, 1, 2, 3, 5, 6, 7, 11, 13, 14,
+17, 19, 21, 22, 23, 29, 31, 33, 37, 38, 41, 43, 46, 47, 53, 57, 59, 61,
+62, 67, 69, 71, 73, 77, 83, 86, 89, 93, 94, 97, 101, 103, 107, 109,
+113, 118, 127, 129, 131, 133, 134, 137, 139, 141, 149, …</div></blockquote>
+<p class="last">Otherwise, this method may not work.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quadratic_integer.QuadraticInteger.is_irreducible">
+<code class="descname">is_irreducible</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger.is_irreducible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the quadratic integer is irreducible.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">is_irreducible</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="quadratic_integer.QuadraticInteger.is_unit">
+<code class="descname">is_unit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quadratic_integer.QuadraticInteger.is_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the quadratic integer is a unit.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span>
+<span class="go">I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="o">.</span><span class="n">is_unit</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">Zi</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span>
+<span class="go">1 + I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span><span class="o">.</span><span class="n">is_unit</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ideal.html" class="btn btn-neutral float-right" title="Ideals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="QiPy documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Adrián Ranea.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ideals &mdash; QiPy 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="QiPy 1.0 documentation" href="index.html"/>
+        <link rel="next" title="Class groups" href="class_group.html"/>
+        <link rel="prev" title="Quadratic Integers" href="quadratic_integer.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QiPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quadratic_integer.html">Quadratic Integers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ideals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_group.html">Class groups</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QiPy</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Ideals</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ideal.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ideals">
+<h1>Ideals<a class="headerlink" href="#ideals" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-ideal"></span><p>This module allows to work with ideals of quadratic integer rings.</p>
+<p>To compute operations with ideal within the same quadratic ring,
+all ideals must be created as <a class="reference internal" href="#ideal.Ideal" title="ideal.Ideal"><code class="xref py py-class docutils literal"><span class="pre">Ideal</span></code></a> objects. To do so:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Create the quadratic integer ring <span class="math">\(\mathcal{O}_{\mathbb{Q}[\sqrt{d}]}\)</span>
+with the function <code class="xref any docutils literal"><span class="pre">QuadraticIntegerRing</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use the returned factory to create the generators of the ideal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator1</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generator2</span> <span class="o">=</span> <span class="n">O</span><span class="p">(</span><span class="s2">&quot;1 + sqrt(-5)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the ideal object with the generators as arguments and use the
+available operators and methods.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">generator1</span><span class="p">,</span> <span class="n">generator2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+<span class="go">[&lt;1 + sqrt(5)*I,3*sqrt(5)*I&gt;]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Note that this module, <code class="docutils literal"><span class="pre">ideal</span></code>, need to be imported to use
+its classes and functions. There are several ways to import it:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Import all functions and classes of QiPy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qipy</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Import only the package, and use the package’s identifier to
+access the classes and functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qipy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">qipy</span><span class="o">.</span><span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">qipy</span><span class="o">.</span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<dl class="class">
+<dt id="ideal.Ideal">
+<em class="property">class </em><code class="descname">Ideal</code><span class="sig-paren">(</span><em>*generators</em><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent an ideal of a quadratic integer ring.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span>
+<span class="go">&lt;3&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span>
+<span class="go">&lt;1 + I&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">*</span> <span class="n">J</span>
+<span class="go">&lt;3 + 3*I,6*I&gt;</span>
+</pre></div>
+</div>
+<p>This class supports the operators <code class="docutils literal"><span class="pre">*</span></code> and <code class="docutils literal"><span class="pre">/</span></code> (division only by prime
+ideals) with their natural meaning.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>An ideal is represented by a reduced basis of two elements (as
+abelian group, not as ideal).</p>
+<p>However, if at some moment it is known that the ideal is principal,
+its representation is changed with a generator (as ideal).</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">),</span> <span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;2*I&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span>
+<span class="go">&lt;1 + I,2*I&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">.</span><span class="n">is_principal</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span>
+<span class="go">&lt;1 + I&gt;</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generators</strong> – a sequence of quadratic integers (of the same quadratic ring)
+that span the ideal.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="ideal.Ideal.O">
+<code class="descname">O</code><a class="headerlink" href="#ideal.Ideal.O" title="Permalink to this definition">¶</a></dt>
+<dd><p>the quadratic integer ring related to the ideal.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ideal.Ideal.norm">
+<code class="descname">norm</code><a class="headerlink" href="#ideal.Ideal.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>the norm of the ideal.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ideal.Ideal.basis">
+<code class="descname">basis</code><a class="headerlink" href="#ideal.Ideal.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of two quadratic integers that span the ideal.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.contain">
+<code class="descname">contain</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.contain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the ideal contains an element.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">.</span><span class="n">contain</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">.</span><span class="n">contain</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Note that the element must be a quadratic integer of the same ring
+as the ideal.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.divide">
+<code class="descname">divide</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.divide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the ideal divides other ideal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.factor">
+<code class="descname">factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor the ideal as a product of prime ideals.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span>
+<span class="go">&lt;2&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factors</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factors</span>
+<span class="go">[&lt;1 + I,2*I&gt;, &lt;1 + I,2*I&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;-2,2*I&gt;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the prime factors.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="#ideal.Ideal" title="ideal.Ideal">Ideal</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ideal.Ideal.generator">
+<code class="descname">generator</code><a class="headerlink" href="#ideal.Ideal.generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A quadratic integer that spans the ideal if it
+is principal. If it isn’t, it returns <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">),</span> <span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;2*I&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">generator</span>
+<span class="go">1 + I</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">O</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">O</span><span class="p">(</span><span class="s2">&quot;1 + sqrt(-5)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">generator</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.is_prime">
+<code class="descname">is_prime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.is_prime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the ideal is prime.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">is_prime</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">is_prime</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.is_principal">
+<code class="descname">is_principal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.is_principal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the ideal is principal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;1 + I&quot;</span><span class="p">),</span> <span class="n">Zi</span><span class="p">(</span><span class="s2">&quot;2*I&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_principal</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">O</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">O</span><span class="p">(</span><span class="s2">&quot;1 + sqrt(-5)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">is_principal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="ideal.Ideal.is_proper">
+<code class="descname">is_proper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.is_proper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the ideal is not the total.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Zi</span> <span class="o">=</span> <span class="n">QuadraticIntegerRing</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">is_proper</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ideal</span><span class="p">(</span><span class="n">Zi</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">is_proper</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ideal.Ideal.prime_divisors">
+<em class="property">classmethod </em><code class="descname">prime_divisors</code><span class="sig-paren">(</span><em>p</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.prime_divisors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the prime ideal(s) that divides <span class="math">\(\langle p \rangle\)</span>
+(the ideal generated by <span class="math">\(p\)</span>) in the quadratic integer ring
+defined by <span class="math">\(d\)</span>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span> <span class="o">=</span> <span class="n">Ideal</span><span class="o">.</span><span class="n">prime_divisors</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span>
+<span class="go">[&lt;3&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span> <span class="o">=</span> <span class="n">Ideal</span><span class="o">.</span><span class="n">prime_divisors</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span>
+<span class="go">[&lt;-1 + 2*I,5*I&gt;, &lt;-1 + 3*I,5*I&gt;]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the prime divisors.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="#ideal.Ideal" title="ideal.Ideal">Ideal</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ideal.Ideal.unit_ideal">
+<em class="property">classmethod </em><code class="descname">unit_ideal</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#ideal.Ideal.unit_ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the unit ideal of the quadratic integer ring
+defined by <span class="math">\(d\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the unit ideal.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#ideal.Ideal" title="ideal.Ideal">Ideal</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="class_group.html" class="btn btn-neutral float-right" title="Class groups" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quadratic_integer.html" class="btn btn-neutral" title="Quadratic Integers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Adrián Ranea.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
