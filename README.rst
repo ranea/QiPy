@@ -25,41 +25,38 @@ The easiest way to install QiPy is with pip_ : ::
 Examples of usage
 ~~~~~~~~~~~~~~~~~
 
-Computing :math:`\frac{1 + i}{1 - i}` in :math:`\mathbb{Z}[i]`:
+Computing |frac| in |Zi|:
 
     >>> Zi = QuadraticIntegerRing(-1)
     >>> Zi("1 + I") / Zi("1 - I")
     I
 
-Factoring :math:`2` in :math:`\mathbb{Z}[i]`:
+Factoring |2| in |Zi|:
 
     >>> Zi = QuadraticIntegerRing(-1)
     >>> Zi(2).factor()
     [1 + I, 1 - I]
 
-Testing whether the ideal :math:`\langle 3, 1 + \sqrt{-5} \rangle` in
-:math:`\mathcal{O}_{\mathbb{Q}[\sqrt{-5}]}` is principal:
+Testing whether the ideal |twogen| in |5| is principal:
 
     >>> O = QuadraticIntegerRing(-5)
     >>> Ideal(O(3), O("1 + sqrt(-5)")).is_principal()
     False
 
-Factoring the ideal :math:`\langle 2 \rangle` in :math:`\mathbb{Z}[i]`:
+Factoring the ideal |2| in |Zi|:
 
     >>> Zi = QuadraticIntegerRing(-1)
     >>> Ideal(Zi(2)).factor()
     [<1 + I,2*I>, <1 + I,2*I>]
 
-Computing the order of the ideal class with representative
-:math:`\langle 3, 1 + \sqrt{-5} \rangle` in
-:math:`\mathcal{O}_{\mathbb{Q}[\sqrt{-5}]}`:
+Computing the order of the ideal class with representative |twogen| in |5|:
 
    >>> O = QuadraticIntegerRing(-5)
    >>> a = IdealClass(Ideal(O(3), O("1 + sqrt(-5)")))
    >>> a.order
    2
 
-Computing the `class number`_ of :math:`\mathcal{O}_{\mathbb{Q}[\sqrt{-5}]}`:
+Computing the `class number`_ of |5|:
 
    >>> G = ClassGroup(-5)
    >>> G.class_number
@@ -77,3 +74,8 @@ Computing the `class number`_ of :math:`\mathcal{O}_{\mathbb{Q}[\sqrt{-5}]}`:
 .. _pip: https://pip.pypa.io
 .. _ideal classes: https://en.wikipedia.org/wiki/Ideal_class_group
 .. _GitHub Page: https://ranea.github.io/qipy/
+.. |2| image:: images/2.gif
+.. |5| image:: images/5.gif
+.. |frac| image:: images/frac.gif
+.. |twogen| image:: images/twogen.gif
+.. |Zi| image:: images/Zi.gif
