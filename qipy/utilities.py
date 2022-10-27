@@ -12,7 +12,7 @@ def is_square_free(integer):
         False
     """
     square_free_part = core(Abs(integer), 2) * sign(integer)
-    return simplify(square_free_part - integer) == 0
+    return simplify(str(square_free_part - integer)) == 0
 
 
 def minkowski_bound(d):

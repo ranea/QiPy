@@ -404,7 +404,7 @@ class ClassGroup(object):
 
         orders = [g.order for g in self.generators]
         for combination in combinations(orders, 2):
-            are_independent = simplify(igcd(*combination) - 1) == 0
+            are_independent = simplify(str(igcd(*combination) - 1)) == 0
             if not are_independent:
                 return False
         return True

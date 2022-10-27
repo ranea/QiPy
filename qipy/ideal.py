@@ -137,7 +137,7 @@ class Ideal(object):
             O = self.O
             n = self.norm
 
-            if simplify(Abs(n) - 1) == 0:
+            if simplify(str(Abs(n) - 1)) == 0:
                 self._generator = O(1)
                 return self._generator
 
@@ -210,7 +210,7 @@ class Ideal(object):
             >>> Ideal(Zi(3)).is_proper()
             True
         """
-        result = simplify(self.norm - 1) != 0
+        result = simplify(str(self.norm - 1)) != 0
         if not result:
             self._generator = self.O(1)
         return result
@@ -328,7 +328,7 @@ class Ideal(object):
     # ----- special methods -----
 
     def __eq__(self, other):
-        if simplify(self.norm - other.norm) != 0:
+        if simplify(str(self.norm - other.norm)) != 0:
             return False
         else:
             return self.divide(other) and other.divide(self)
