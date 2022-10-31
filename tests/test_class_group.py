@@ -50,7 +50,7 @@ class TestIdealClass(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_inverse(self, l11, l12, d):
         assume(l11)
         assume(l11 != (0, 0))
@@ -76,7 +76,7 @@ class TestIdealClass(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_order(self, l11, l12, d):
         assume(l11)
         assume(l11 != (0, 0))
@@ -109,7 +109,7 @@ class TestIdealClass(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_multiplication(self, l11, l12, l21, l22, d):
         assume(l11)
         assume(l11 != (0, 0))

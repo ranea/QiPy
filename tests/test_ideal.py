@@ -60,7 +60,7 @@ class TestIdeal(unittest.TestCase):
         integers(min_value=min_value_d, max_value=max_value_d),
         integers(min_value=1, max_value=max_index_prime)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_prime_divisors(self, l11, l12, d, index_p):
         assume(l11)
         assume(l11 != (0, 0))
@@ -92,7 +92,7 @@ class TestIdeal(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_multiplication(self, l11, l12, l21, l22, d):
         assume(l11)
         assume(l11 != (0, 0))
@@ -124,7 +124,7 @@ class TestIdeal(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_factor(self, l11, l12, d):
         assume(l11)
         assume(l11 != (0, 0))

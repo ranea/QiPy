@@ -33,7 +33,7 @@ class TestQuadraticIntegers(unittest.TestCase):
                integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_ring_propierties(self, l1, l2, l3, d):
         assume(l1)
         assume(l2)
@@ -67,7 +67,7 @@ class TestQuadraticIntegers(unittest.TestCase):
         tuples(integers(min_value=min_value_int, max_value=max_value_int), integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples)
+    @settings(max_examples=samples, deadline=None)
     def test_composition_add_sub(self, l1, l2, d):
         assume(l1)
         assume(l2)
@@ -105,7 +105,7 @@ class TestQuadraticIntegers(unittest.TestCase):
 
         print("test_composition_mul_div | {0} | {1} | {2}".format(O.__name__, alpha, beta))
 
-        assert alpha == (alpha * beta) / beta
+        assert not beta.is_unit() or (alpha == (alpha * beta) / beta)
 
     @given(
         tuples(integers(min_value=min_value_int, max_value=max_value_int), integers(min_value=min_value_int, max_value=max_value_int)),
@@ -134,7 +134,7 @@ class TestQuadraticIntegers(unittest.TestCase):
         integers(min_value=min_value_exp, max_value=max_value_exp),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples // 2)
+    @settings(max_examples=samples // 2, deadline=None)
     def test_exponentation_properties(self, l1, e, f, d):
         assume(l1)
         assume(e)
@@ -176,7 +176,7 @@ class TestQuadraticIntegers(unittest.TestCase):
         tuples(integers(min_value=min_value_int, max_value=max_value_int), integers(min_value=min_value_int, max_value=max_value_int)),
         integers(min_value=min_value_d, max_value=max_value_d)
     )
-    @settings(max_examples=samples // 2)
+    @settings(max_examples=samples // 2, deadline=None)
     def test_factor(self, l1, d):
         assume(l1)
         assume(d != 0)
