@@ -41,7 +41,7 @@ from functools import lru_cache
 from sympy import sqrt, simplify, Rational, roots, Abs, isprime, factorint
 from sympy import denom, expand
 from sympy.polys.numberfields import minimal_polynomial
-from sympy.solvers.diophantine import diop_DN
+from sympy.solvers.diophantine.diophantine import diop_DN
 
 from qipy.utilities import is_square_free
 
@@ -170,12 +170,12 @@ def QuadraticIntegerRing(d):
 
         def __init__(self, value=None, coeff_e=None, coeff_d=None):
             if value is not None:
-                self.value = simplify(value)
+                self.value = simplify(str(value))
             elif coeff_e is not None:
-                self.value = simplify(coeff_e[0] + coeff_e[1] * QuadraticInteger.e)
+                self.value = simplify(str(coeff_e[0] + coeff_e[1] * QuadraticInteger.e))
                 self._coeff_e = coeff_e
             elif coeff_d is not None:
-                self.value = simplify(coeff_d[0] + coeff_d[1] * sqrt(QuadraticInteger.d))
+                self.value = simplify(str(coeff_d[0] + coeff_d[1] * sqrt(QuadraticInteger.d)))
                 self._coeff_d = coeff_d
             else:
                 raise ValueError("Invalid input.")
@@ -185,19 +185,19 @@ def QuadraticIntegerRing(d):
             else:
                 polynml = minimal_polynomial(self.value, "x")
                 poly_roots = list(roots(polynml))  # length 1 or 2
-                if simplify(self.value - poly_roots[0]) == 0:
+                if simplify(str(self.value - poly_roots[0])) == 0:
                     self.conjugate = poly_roots[-1]
                 else:
                     self.conjugate = poly_roots[0]
 
-            self.norm = simplify(self.value * self.conjugate)
-            self.trace = simplify(self.value + self.conjugate)
+            self.norm = simplify(str(self.value * self.conjugate))
+            self.trace = simplify(str(self.value + self.conjugate))
 
             if not(self.norm.is_integer and self.trace.is_integer):
                 raise ValueError("It isn't a quadratic integer.")
             else:
                 for v in self.coeff_d:
-                    sv = simplify(v)
+                    sv = simplify(str(v))
                     if not sv.is_rational or denom(sv) not in [1, 2]:
                         raise ValueError("It isn't a quadratic integer.")
 
@@ -376,7 +376,7 @@ def QuadraticIntegerRing(d):
                 False
 
             """
-            return simplify(self.euclidean_function() - 1) == 0
+            return simplify(str(self.euclidean_function() - 1)) == 0
 
         def is_irreducible(self):
             """Test whether the quadratic integer is irreducible.
@@ -472,7 +472,7 @@ def QuadraticIntegerRing(d):
         # ----- special methods -----
 
         def __eq__(self, other):
-            return simplify(self - other) == 0
+            return simplify(str(self - other)) == 0
 
         def __ne__(self, other):
             return not self.__eq__(other)
