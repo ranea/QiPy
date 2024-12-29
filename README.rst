@@ -17,11 +17,6 @@ Installation
 QiPy is written in Python 3 and uses the Python library SymPy_. Therefore,
 Python 3 and SymPy must be installed in your computer.
 
-The easiest way to install QiPy is with pip_ : ::
-
-    pip3 install qipy
-
-
 Examples of usage
 ~~~~~~~~~~~~~~~~~
 
